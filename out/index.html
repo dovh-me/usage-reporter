@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="">
+    <meta http-equiv="Content-Type" content="text/css">
+    <meta http-equiv="Content-Type" content="application/json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Mem Usage report</title>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background-color: #000;
+            box-sizing: border-box;
+            padding: 10px;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-container {
+            background-color: white;
+            width: 80%;
+            height: 80%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="chart-container" class="chart-container"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
