@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "ES2020",
+        "outDir": "./out",
+        "moduleResolution": "node",
+        "removeComments": true,
+        "noImplicitAny": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+    },
+    "include": ["src/**/*", "src/server/package.json"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+}

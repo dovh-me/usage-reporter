@@ -6,12 +6,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "record": "node index"
+    "record": "tsc && node out/index",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
   }
 }

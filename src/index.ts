@@ -2,13 +2,13 @@ import {exec} from 'child_process';
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import {writeFile} from 'fs/promises';
-import path from 'path';
+import {join} from 'path';
 
 const frequencySeconds = 1;
-const outPath = path.join('out','mem-usage.json');
+const outPath = join('.','public','mem-usage.json');
 
 function start() {
-    let out = [];
+    let out:{total:number, used: number, free: number, timestamp: number}[] = [];
     const child  = exec(`free --mega -s ${frequencySeconds}`);
 
     child.stdout.on('data', (data) => {

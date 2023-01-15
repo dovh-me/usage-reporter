@@ -22,18 +22,44 @@
             width: 100%;
             height: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
+            flex-direction: column;
         }
         .chart-container {
             background-color: white;
             width: 80%;
-            height: 80%;
+            height: 50%;
+        }
+        .summary {
+            box-sizing: border-box;
+            width: 60%;
+            height: 20%; 
+            min-width: 400px;
+            background-color: white;
+            padding: 5px;
         }
     </style>
 </head>
 <body>
-    <canvas id="chart-container" class="chart-container"></canvas>
+    <div id="summary" class="summary">
+        <h3>Summary - Memory Usage</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Average memory usage</td>
+                    <td class="avg-mem"></td>
+                </tr>
+                <tr>
+                    <td>Host</td>
+                    <td class="host-name"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="chart-container" class="chart-container">
+        <canvas id="chart" class="chart-container"></canvas>
+    </div>
 
     <script src="script.js"></script>
 </body>
