@@ -1,7 +1,7 @@
-import path from 'path';
+import {join} from 'path';
 
 export default {
-    outPath: path.join(''),
-    frequencySeconds: 1,
+    outPath: join('public', 'mem-usage.json'),
+    frequencySeconds: 2,
     unit: ''
 }

@@ -4,6 +4,9 @@ import { stdin as input, stdout as output } from 'node:process';
 import {writeFile} from 'fs/promises';
 import {join} from 'path';
 
+// import the config
+import config from '../config';
+
 type outType = {
     hostname: string,
     startTimestamp: number,
@@ -11,8 +14,9 @@ type outType = {
     dataset: {total:number, used: number, free: number, timestamp: number}[]
 }
 
-const frequencySeconds = 1;
-const outPath = join('.','public','mem-usage.json');
+const frequencySeconds = config.frequencySeconds || 1;
+const outPath = config.outPath || join('.','public','mem-usage.json');
+//TODO: add support for different units
 
 async function start() {
     let out:outType = {

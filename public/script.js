@@ -7,8 +7,20 @@ xmlHttp.onload = function () {
     const chartData = data.dataset.map(e => +e.used);
 
     setSummaryFields(data);
-    console.log('chart max', data.dataset[0].total)
+
     new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Memory Usage',
+                data: chartData,
+                fill: true,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0,
+                label: 'Memory Usage (MB)'
+            }]
+        },
         options: {
             elements: {
                 point: {
@@ -29,30 +41,14 @@ xmlHttp.onload = function () {
                         scaleLabel: {
                             display: true,
                             labelString: 'Time',
-                            beginAtZero: true
                         }
                     },
                 y: {
                         display: true,
-                        ticks: {
-                            beginAtZero: true,
-                            max: data.dataset[0].total
-                        }
+                        max: (Math.round(data.dataset[0].total) *100)/100
                     }
             },
         },
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Memory Usage',
-                data: chartData,
-                fill: true,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 1,
-                label: 'Memory Usage (MB)'
-            }]
-        }
     });
 }
 
