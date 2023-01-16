@@ -4,20 +4,37 @@ import { stdin as input, stdout as output } from 'node:process';
 import {writeFile} from 'fs/promises';
 import {join} from 'path';
 
+type outType = {
+    hostname: string,
+    startTimestamp: number,
+    endTimestamp: number,
+    dataset: {total:number, used: number, free: number, timestamp: number}[]
+}
+
 const frequencySeconds = 1;
 const outPath = join('.','public','mem-usage.json');
 
-function start() {
-    let out:{total:number, used: number, free: number, timestamp: number}[] = [];
+async function start() {
+    let out:outType = {
+        hostname: '',
+        startTimestamp: Date.now(),
+        endTimestamp: Date.now(),
+        dataset: []
+    };
     const child  = exec(`free --mega -s ${frequencySeconds}`);
 
     child.stdout.on('data', (data) => {
-        const memDataLine = data.split('\n')[out.length === 0? 1:2];
+        const memDataLine = data.split('\n')[out.dataset.length === 0? 1:2];
         const [,total, used,free] = memDataLine.split(/[\s]+/);
-        out.push({total, used, free, timestamp: Date.now()});
+        out.dataset.push({total, used, free, timestamp: Date.now()});
     });
 
+    getHostName(out);
+
     getQuitSignal().then(() => {
+        // set the end timestamp
+        out.endTimestamp = Date.now();
+
         writeFile(outPath, JSON.stringify(out),{encoding: 'utf-8'}).then(() => {
             child.kill('SIGINT');
             console.log('Memory usage has been recorded to ' + outPath);
@@ -38,4 +55,13 @@ async function getQuitSignal() {
     return;
 }
 
-start();
+function getHostName(obj: outType) {
+    const child  = exec(`hostname -I`);
+    
+    child.stdout.on('data', (data) => {
+        child.kill('SIGINT');
+        obj.hostname = data.trim();
+    });
+}
+
+await start();
