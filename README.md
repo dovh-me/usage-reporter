@@ -10,7 +10,7 @@ A simple resource usage report generator for **linux** flavored operating system
 ## Prerequisites
 - Linux flavored operating system
 - NodeJs (17+)
-- An http server (http-server from recommended) - To view the generated report
+- An http server (http-server recommended) - To view the generated report
 
 ## How to use
 
